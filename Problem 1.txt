@@ -1,0 +1,6 @@
+# Move 30h in register AX. Move 25h in register BX. Multiply the two numbers and store it in the register CX.
+
+mov ax,30h
+mov bx,25h
+mul bl    
+mov cx,ax

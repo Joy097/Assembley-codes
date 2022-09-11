@@ -1,0 +1,49 @@
+# The following algorithm may be used to carry out multiplication of two positive numbers M and N by repeated addition. 
+Initialize product to 0 (put 0 in CX)
+REPEAT 
+add M to product 
+decrement N UNTIL N equals 0 
+
+Write a sequence of instructions to multiply AX by BX, and put the product in CX. You may ignore the possibility of overflow.
+
+
+
+
+.MODEL SMALL
+.STACK 100H
+.DATA
+   
+
+
+.CODE
+MAIN PROC 
+          MOV ax,@DATA 
+          MOV ds,ax 
+          
+          mov ax,5d   ;1st positive number
+          mov bx,6d   ;2nd positive number
+          mov cx,0d   
+          
+          start:
+          cmp bx,0d
+          jg gg
+          jmp end
+          
+          gg: 
+          
+          add cx,ax
+          
+          sub bx,1d
+            
+          
+          jmp start    
+          
+          
+          end:
+
+          
+          
+         
+          
+          MAIN ENDP
+          END MAIN

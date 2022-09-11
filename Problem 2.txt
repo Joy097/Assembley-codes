@@ -1,0 +1,6 @@
+# Do the following operation and store the result in your appropriate registers: 8A30 h / 0012 h
+
+mov ax,8A30h
+mov bx,0012h
+div bx 
+mov cx,ax

@@ -1,0 +1,97 @@
+# Write a program to: 
+(a) Display a "?" 
+(b) Read two decimal digits whose sum is less than 10
+(c) Display them and their sum on the next line, with an appropriate 
+message. Sample execution:
+The sum of 3 and 5 is 8
+
+
+.MODEL SMALL
+.STACK 100H
+.DATA
+a db "give one number $" 
+b db " give another number $"  
+c db " The sum of $" 
+d db " and $" 
+e db " is $"
+
+.CODE
+MAIN PROC  
+          ;(a)
+          MOV ax,@DATA 
+          MOV ds,ax 
+          
+          mov ah,2
+          mov dl,'?'
+          int 21h    
+          
+          mov ah,2
+          mov dl,10
+          int 21h
+          mov dl,13
+          int 21h
+          
+          ;(b)input
+          
+          mov ah,9
+          lea dx,a
+          int 21h
+          
+          mov ah,1
+          int 21h  
+          mov bl,al
+          
+          mov ah,9
+          lea dx,b
+          int 21h
+          
+          mov ah,1
+          int 21h
+          mov bh,al  
+          
+          mov ah,2
+          mov dl,10
+          int 21h
+          mov dl,13
+          int 21h
+          
+
+          ;(c) output
+          
+                   
+          mov cl,bl
+          add cl,bh 
+          sub cl,48d
+                                                 
+          mov ah,9
+          lea dx,c
+          int 21h
+                   
+          mov dl,bl
+          mov ah,2  
+          int 21h   
+          
+          mov ah,9
+          lea dx,d
+          int 21h
+          
+          mov dl,bh
+          mov ah,2  
+          int 21h
+          
+          mov ah,9
+          lea dx,e
+          int 21h
+                   
+          mov dl,cl
+          mov ah,2  
+          int 21h 
+               
+          
+          
+          mov ah,4ch
+          int 21h
+          
+          MAIN ENDP
+END MAIN
+

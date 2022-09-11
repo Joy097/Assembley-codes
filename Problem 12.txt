@@ -1,0 +1,67 @@
+# Write a program that takes all 3 sides of a triangle and prints whether the triangle is equilateral, isosceles or neither.
+
+
+.MODEL SMALL
+.STACK 100H
+.DATA
+  
+a db " equilateral $"
+b db " isosceles $"
+c db " neither$"  
+
+
+.CODE
+MAIN PROC 
+          MOV ax,@DATA 
+          MOV ds,ax 
+          
+                             
+          mov ah,01h
+          int 21h      ;first side     
+          sub al,30h   
+          mov bh,al    
+          
+          mov ah,01h
+          int 21h      ;second side     
+          sub al,30h  
+          mov dh,al    
+          
+          mov ah,01h
+          int 21h      ;third side     
+          sub al,30h   
+          mov ch,al    
+          
+          cmp ch,dh
+          je ab        ;if ch = dh 
+          
+          cmp ch,bh
+          je is 
+          jmp en
+          
+          ab:
+          cmp ch,bh    ;if ch = dh = bh
+          je eq 
+          jmp is
+          
+          eq :
+          lea dx,a 
+          mov ah,9
+          int 21h
+          jmp gg  
+          
+          is:   
+          lea dx,b 
+          mov ah,9
+          int 21h 
+          jmp gg    
+
+          
+          en:
+          lea dx,c 
+          mov ah,9
+          int 21h     
+          
+          gg:
+          
+          MAIN ENDP
+          END MAIN

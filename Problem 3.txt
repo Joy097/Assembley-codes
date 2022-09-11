@@ -1,0 +1,8 @@
+# Swap two numbers (0-9) between registers CX and DX without using a third register.
+
+mov cx, 2
+mov dx,4
+add cx,dx
+sub dx,cx
+add cx,dx
+add dx,cx

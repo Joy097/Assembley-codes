@@ -1,0 +1,40 @@
+# Calculate, and put the sum of the arithmetic series 7 + 10 + 13+ … + 148 in AX.
+
+
+.MODEL SMALL
+.STACK 100H
+.DATA
+   
+
+
+.CODE
+MAIN PROC 
+          MOV ax,@DATA 
+          MOV ds,ax 
+          
+          mov ax,0d
+          mov dx,7d
+          
+          start:
+          cmp dx,149d
+          jl gg
+          jmp end
+          
+          gg: 
+          
+          add ax,dx
+          
+          add dx,3d
+            
+          
+          jmp start    
+          
+          
+          end:
+
+          
+          
+         
+          
+          MAIN ENDP
+          END MAIN

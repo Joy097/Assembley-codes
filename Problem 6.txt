@@ -1,0 +1,56 @@
+# Perform addition of two hexadecimal numbers, 3h and 4h, by taking 
+these as inputs from the user. You must display the appropriate 
+messages when taking inputs (“Enter num1:” and “Enter num2”) and 
+showing the output(“The result is:”)
+
+.MODEL SMALL
+.STACK 100H
+.DATA
+a db " Enter num1 : $"  
+b db " Enter num2 : $"  
+c db " The result is : $"   
+
+.CODE
+MAIN PROC 
+          MOV ax,@DATA 
+          MOV ds,ax 
+           
+          lea dx,a 
+          mov ah,9
+          int 21h  
+          
+          ;input
+          mov ah,1
+          int 21h  
+          mov bl,al  
+          
+          lea dx,b 
+          mov ah,9
+          int 21h    
+          
+          ;input
+          mov ah,1
+          int 21h 
+          add bl,al
+          sub bl,48d    
+           
+          mov ah,2
+          mov dl,10
+          int 21h
+          mov dl,13
+          int 21h
+
+          
+          lea dx,c 
+          mov ah,9
+          int 21h 
+           
+          mov ah,2 
+          mov dl,bl 
+          int 21h
+               
+          
+          
+          MAIN ENDP
+          END MAIN
+          

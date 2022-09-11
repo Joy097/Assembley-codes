@@ -1,0 +1,20 @@
+# Solve  A = - (A + 5), where A is a variable to be declared beforehand containing 30h as its value
+
+org 100h
+.data
+a Dw 30h
+
+.code      
+mov ax,@data
+mov ds,ax
+   main proc 
+     mov ax,a
+     add ax,5h  
+     mov bx,-1h
+     mul bx
+     mov a,ax       
+     
+     main endp
+   end main
+   
+ret

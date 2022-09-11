@@ -1,0 +1,28 @@
+Write a count-controlled loop to display a row of 50 stars, ‘*’.
+
+
+.MODEL SMALL
+.STACK 100H
+.DATA
+  
+a db "*$"  
+
+
+.CODE
+MAIN PROC 
+          MOV ax,@DATA 
+          MOV ds,ax 
+          
+          mov cx,50
+          
+          start:
+          lea dx,a 
+          mov ah,9    ;print
+          int 21h  
+          
+          
+          loop start
+         
+          
+          MAIN ENDP
+          END MAIN

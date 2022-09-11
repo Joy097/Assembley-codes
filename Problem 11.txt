@@ -1,0 +1,85 @@
+Write a program that takes an input from a user to check whether a year is leap year or not and print “Leap Day”
+
+
+.MODEL SMALL
+.STACK 100H
+.DATA
+  
+a db " Leap Day $"  
+
+
+.CODE
+MAIN PROC 
+          MOV ax,@DATA 
+          MOV ds,ax 
+          
+          ;input of four digit year = xyzn                   
+          mov ah,01h
+          int 21h      ;x     
+          sub al,30h   ;xd
+          mov bh,al    ;bh =xd
+          
+          mov ah,01h   ;y
+          int 21h
+          sub al,30h   ;yd
+          mov ch,al    ;ch=yd
+          mov al,bh    ;al=xd
+          mov bl,10    ;bl=10
+          mul bl       ;al=x.10
+          add al,ch    ;xy
+          mov cx,ax    ;cx=xy
+          
+          mov ah,01h
+          int 21h      ;Same for z
+          sub al,30h   
+          mov bh,al    
+          mov ax,cx
+          mov bl,10
+          mul bl 
+          add al,bh 
+          mov cx,ax
+          
+          mov ah,01h
+          int 21h     ;Same for n
+          sub al,30h   
+          mov bh,al    
+          mov ax,cx
+          mov bl,10
+          mul bl 
+          add al,bh 
+          mov cx,ax   ;cx=xyzn
+          
+          mov bx,100
+          mov ax,cx
+          div bx      ;divide with 100
+          
+          cmp dl,0    ;compare remainder with 0
+          je ab
+          
+          mov bx,4
+          mov ax,cx
+          div bx      ;divide with 4
+          
+          cmp dl,0    ;compare remainder with 0
+          je lp
+          jmp end
+          
+          ab:
+          mov bx,400
+          mov ax,cx
+          div bx      ;divide with 400
+          
+          cmp dl,0    ;compare remainder with 0
+          je lp 
+          jmp end
+          
+          lp:
+          lea dx,a 
+          mov ah,9
+          int 21h     ;So, 2000 and 2400 are leap years
+
+          
+          end:
+          
+          MAIN ENDP
+          END MAIN

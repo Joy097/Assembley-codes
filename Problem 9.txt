@@ -1,0 +1,58 @@
+# Write a program which takes in 3 digits as input from the user and shows the mean of even numbers. [all inputs >=0]
+Sample:
+Input 1	  Input 2	Input 3	  Output
+2	    3	            2	    2
+0	    1	            2	    1
+
+
+
+.MODEL SMALL
+.STACK 100H
+.DATA
+  
+ 
+
+.CODE
+MAIN PROC 
+          MOV ax,@DATA 
+          MOV ds,ax 
+                             
+          mov cx,0 
+          mov bl,2   
+          mov dl,0
+          
+          ;take 3 inputs
+          input: 
+            
+          
+          mov ah,1
+          int 21h  
+          mov bh,al
+          div bl    ;divide the number by 2
+          
+          cmp ah,0
+          je even    ;if the remainder is equal to 0 
+          
+          jmp tt
+          
+          even:
+          add ch,1   ;number of even numbers
+          add dl,bh  ;sum of even numbers
+          
+          tt :  
+          add cl,1
+          cmp cl,3   ;loop count
+          jl input
+          
+                
+          mov al,dl   
+          div ch
+          
+          mov ah,2   ;print the quotient or the mean of even number
+          mov dl,al 
+          int 21h
+                         
+          
+          
+          MAIN ENDP
+          END MAIN

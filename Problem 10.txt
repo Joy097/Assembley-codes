@@ -1,0 +1,93 @@
+# Write a program which takes a digit as input to represent an hour of a day and output the greetings according to that. [Input must be an integer]
+Input = Hour (0-23)	Input < 12	12 <= Input < 18	Input >=18
+Output = Greetings	Good Morning	Good Afternoon	        Good Night
+
+
+.MODEL SMALL
+.STACK 100H
+.DATA
+  
+a db " Greetings $"  
+b db " Good Morning $"  
+c db " Good Afternoon $"  
+d db " Good Night $"  
+
+.CODE
+MAIN PROC 
+          MOV ax,@DATA 
+          MOV ds,ax 
+                             
+          mov ah,01h
+          int 21h           
+          sub al,30h
+          mov bh,al
+          
+          mov ah,01h
+          int 21h
+          sub al,30h
+          mov ch,al
+          mov al,bh
+          mov bl,10
+          
+          mul bl               
+          add al,ch
+          mov cx,ax
+          
+          
+          mov dh,24  
+          mov dl,12
+          mov bh,18
+          
+          cmp cl,dh 
+          jl gre
+          jmp end ;end if it is not 0-23
+          
+          abc:
+          cmp cl,dl  
+          jl gdm     ;if less than 12
+          
+          cmp cl,dl
+          jge cndi   ;if greater than or equal to 12
+          jmp cc  
+          
+          cndi:
+          cmp cl,bh
+          jl gaf     ;if 12<=input<18
+           
+          cc: 
+          cmp cl,bh
+          jge gn     ;if input>=18
+             
+          gre: 
+          lea dx,a 
+          mov ah,9
+          int 21h    
+          
+          
+          mov dh,24  
+          mov dl,12
+          jmp abc
+           
+          
+          gdm:
+          lea dx,b 
+          mov ah,9
+          int 21h    
+          jmp end
+            
+          
+          gaf: 
+          lea dx,c 
+          mov ah,9
+          int 21h
+          jmp end
+          
+          gn:
+          lea dx,d 
+          mov ah,9
+          int 21h
+          
+          end:
+          
+          MAIN ENDP
+          END MAIN

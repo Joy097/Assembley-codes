@@ -1,0 +1,32 @@
+# Take the character input ‘&’ and display it. Also, display the message, 
+“This is my first message using assembly!”
+
+
+.MODEL SMALL
+.STACK 100H
+.DATA
+v1 db " This is my first message using assembly$"   
+
+.CODE
+MAIN PROC 
+          MOV ax,@DATA 
+          MOV ds,ax  
+          
+          mov ah,1   ;input &
+          int 21h
+          
+          mov bl,al
+          
+          mov ah,2
+          int 21h
+          
+
+          
+          mov ah,9
+          int 21h 
+               
+          
+          
+          MAIN ENDP
+          END MAIN
+          
